@@ -6,7 +6,7 @@ import accepted_data
 
 app = Flask(__name__)
 
-@app.route("/",methods =["GET","POST"])
+@app.route("/",methods =["POST"])
 def hello():
     if request.method == "POST":
         int_rate=request.form['int_rate']
@@ -18,12 +18,9 @@ def hello():
     return render_template("index.html", output = ls)
 
 
-#@app.route("/submit", methods = ["POST"])
-#def submit():
-#    if request.method == "POST":
-#         name=request.form["username"]
-
-#    return render_template("submit.html",n =name)
+@app.route("/")
+def submit():
+    return render_template("index.html")
 
 if __name__ == "__main__":
     app.run(debug=True)
