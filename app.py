@@ -6,7 +6,7 @@ import accepted_data
 
 app = Flask(__name__)
 
-@app.route("/",methods =["POST"])
+@app.route("/",methods ="POST")
 def hello():
     if request.method == "POST":
         loan_amnt=request.form['loan_amnt']
