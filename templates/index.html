@@ -5,22 +5,63 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Model Deployment</title>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename = 'styles.css') }}">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+  	<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet"/>
 </head>
 <body>
-    <h1>Predict your loan status</h1>
+    <nav class="navbar navbar-inverse" style="border-radius: 0px;">
+        <div class="container-fluid">
+          <div class="navbar-header">
+            <a class="navbar-brand" href="{{ url_for('hello') }}" style="color: white;">LOAN STATUS PREDICTION</a>
+            </div>
+        </div>>
+    </nav>
+
+    <div class="vgrad"></div>
+
+    <div class="container vcon">
+        <div class="jumbotron text-center" style="background-color: transparent; margin-top: -40px;margin-bottom: -30px;">
+              <h2>PREDICT YOUR LOAN STATUS</h2>
+        </div>
+
+        <div class="container" style="margin-left: -20px; background-color: rgba(101, 167, 221, 0.24) ;">
+            <div class="row">
     
-    <form action="/" method="post">
-        <p>
-            Enter your interest rate
-        </p>
-        <input type="text" name="int_rate" placeholder="Interest rate"><br>
-        <p>
-            Enter your grade
-        </p>
-        <input type="text" name="grade" placeholder="Grade"><br><br>
-        <input type="submit">
-    </form>
+                <div class="col-sm-3"></div>
+    
+                <div class="col-sm-6">
+    
+                <center>
+                    <form action="/" method="post">
+                        <p>
+                            Enter loan amount:
+                        </p>
+                        <div class="form-group"><input class="form-control" type="text" name="loan_amnt" placeholder="Loan amount"></div><br>
+                        <p>
+                            Enter your annual income:
+                        </p>
+                        <div class="form-group"><input class="form-control" type="text" name="annual_inc" placeholder="Annual Income"></div><br>
+                        <p>
+                            Enter your interest rate:
+                        </p>
+                        <div class="form-group"><input class="form-control" type="text" name="int_rate" placeholder="Interest rate"></div><br>
+                        <p>
+                            Enter term duration:(0 for 36 months,1 for 60 months)
+                        </p>
+                        <div class="form-group"><input class="form-control" type="text" name="term" placeholder="Term"></div><br>
+                        <p>
+                            Enter your grade:(1 for 'A',2 for 'B',3 for 'C',4 for 'D',5 for 'E',6 for'F',7 for 'G')
+                        </p>
+                        <div class="form-group"><input class="form-control" type="text" name="grade" placeholder="Grade"></div><br>
+                        <center>{{output}}</center><br>
+                        <input type="submit" class="my-cta-button" value="Predict" style="border: 1px solid blue;">
+                    </form>   
+                </center>
+
+                </div>
+            </div> 
+        </div>   
     <br>
-    {{output}}
 </body>
 </html>
