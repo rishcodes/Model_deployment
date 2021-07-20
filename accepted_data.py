@@ -14,8 +14,8 @@ def loan_status_prediction(loan_amnt,annual_inc,int_rate,term,grade):
     model=LogisticRegression()
 
 
-    X_train=X_train.head(1000).loc[:,["loan_amnt","annual_inc","int_rate","term_cat","grade_cat"]].values
-    y_train=y_train.head(1000).loc[:,["loan_status_cat"]].values
+    X_train=X_train.head(1000).iloc[:,1:6].values
+    y_train=y_train.head(1000).iloc[:,1:2].values
 
     model.fit(X_train,y_train)
     
