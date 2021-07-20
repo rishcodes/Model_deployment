@@ -9,11 +9,11 @@ app = Flask(__name__)
 @app.route("/",methods =["POST"])
 def hello():
     if request.method == "POST":
-        loan_amnt=request.form['loan_amnt']
-        annual_inc=request.form['annual_inc']
-        int_rate=request.form['int_rate']
-        term=request.form['term']
-        grade=request.form['grade']
+        loan_amnt=float(request.form['loan_amnt'])
+        annual_inc=float(request.form['annual_inc'])
+        int_rate=float(request.form['int_rate'])
+        term=int(request.form['term'])
+        grade=int(request.form['grade'])
         loan_status=accepted_data.loan_status_prediction(loan_amnt,annual_inc,int_rate,term,grade)
         dict={1:"Charged Off ",
           2:"Current",
@@ -21,7 +21,7 @@ def hello():
           4:"Does not meet the credit policy. Status:Charged Off",
           5:"Does not meet the credit policy. Status:Fully Paid ",
           6:"Fully Paid"}
-        ls="The predicted loan status is:"+ dict[loan_status] 
+        ls="The predicted loan status is:"+ dict[int(loan_status)] 
     else:
         ls=""
     return render_template("index.html", output = ls)
