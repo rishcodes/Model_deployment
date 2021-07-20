@@ -1,27 +1,33 @@
 from flask import Flask
 from flask.globals import request
 from flask.templating import render_template
+import pickle
+import numpy as np
 
-import accepted_data
+model = pickle.load(open("loan.pkl", 'rb'))
+
 
 app = Flask(__name__)
 
 @app.route("/",methods =["POST"])
 def hello():
     if request.method == "POST":
-        loan_amnt=float(request.form['loan_amnt'])
-        annual_inc=float(request.form['annual_inc'])
-        int_rate=float(request.form['int_rate'])
-        term=int(request.form['term'])
-        grade=int(request.form['grade'])
-        loan_status=accepted_data.loan_status_prediction(loan_amnt,annual_inc,int_rate,term,grade)
+        loan_amnt=request.form['loan_amnt']
+        annual_inc=request.form['annual_inc']
+        int_rate=request.form['int_rate']
+        term=request.form['term']
+        grade=request.form['grade']
+        
+        X_test=np.array([[loan_amnt,annual_inc,int_rate,term,grade]])
+
+        pred=model.predict(X_test)
         dict={1:"Charged Off ",
           2:"Current",
           3:"Default",
           4:"Does not meet the credit policy. Status:Charged Off",
           5:"Does not meet the credit policy. Status:Fully Paid ",
           6:"Fully Paid"}
-        ls="The predicted loan status is:"+ dict[int(loan_status)] 
+        ls="The predicted loan status is:"+ dict[pred[0]] 
     else:
         ls=""
     return render_template("index.html", output = ls)
